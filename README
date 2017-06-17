@@ -1,12 +1,24 @@
-PROJECT
+Big Data tool that analyzes raw ADS-B data to determine standard flight routes
+between pairs of airports. Written in Apache Spark, runs on Hadoop clusters.
+
+This work was carried out by Filippo Sestini and Davide Dal Bianco as a project
+for the Large-Scale Data Engineering course at Vrije Universiteit, Amsterdam.
+
+A paper documenting the work can be found here:
+https://event.cwi.nl/lsde/2016/papers/group01.pdf
+
+A visualization frontend using data produced by the tool can be found here:
+https://event.cwi.nl/lsde/2016/results/group01/
+
+# PROJECT
 
 To compile the project run the following command from the `project' folder:
 
-$> sbt package
+$ sbt package
 
 The resulting jar can be submitted to spark using the following command:
 
-$> spark-submit --class [classname] --packages com.databricks:spark-avro_2.10:2.0.1,com.databricks:spark-csv_2.10:1.5.0 --jars lib/libadsb-2.0.jar,lib/ssj-3.2.0.jar --master yarn --deploy-mode cluster target/scala-2.10/adsbtools_2.10-1.0.jar [arguments]
+$ spark-submit --class [classname] --packages com.databricks:spark-avro_2.10:2.0.1,com.databricks:spark-csv_2.10:1.5.0 --jars lib/libadsb-2.0.jar,lib/ssj-3.2.0.jar --master yarn --deploy-mode cluster target/scala-2.10/adsbtools_2.10-1.0.jar [arguments]
 
 Where [classname] must be replaced with one of the following:
 - nl.vu.adsbtools.Positions
@@ -18,12 +30,12 @@ Both `airlines.dat' and `airports.csv' must be present in the home of the hdfs
 file system. The location of `airports.csv' must also be submitted explicitly as
 command line argument to spark-submit when running the class FlightDetection.
 
-VISUALIZATION
+# VISUALIZATION
 
 You can run the web based visualization typing the following commands from the `visualization' folder:
 
-$> npm install
-$> npm start
+$ npm install
+$ npm start
 
 The webserver is then listening on the port 3000. A different port can be set using the PORT environment variable
 
